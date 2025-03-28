@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link rel="stylesheet" href="home.component.css"> <!-- Link to an external CSS file -->
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="image-container">
+            <img src="logo.png" alt="Profile Image">
+        </div>
+        <button class="sidebar-button" routerLink="/create-task">Create Task</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="header">
+            <button class="logout-button" routerLink="/login">Logout</button>
+        </div>
+        <div class="content">
+          <h1>Task List</h1>
+          <div class="task-list">
+              <div *ngFor="let task of tasks" class="task-card">
+                  <h3>{{ task.title }}</h3>
+                  <p>{{ task.description }}</p>
+                  <p><strong>Due Date:</strong> {{ task.dueDate }}</p>
+                  <p><strong>Status:</strong> {{ task.status }}</p>
+                  <!-- <button (click)="deleteTask(task.id)">🗑️ Delete</button> -->
+              </div>
+          </div>
+            <!-- <h1>Welcome to the Home Page!</h1>
+            <p>This is your application dashboard where you can manage your tasks. can place ur cards inside content</p> -->
+            
+          </div>
+    </div>
+</body>
+</html>
