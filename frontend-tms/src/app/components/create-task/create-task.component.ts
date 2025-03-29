@@ -21,13 +21,38 @@ export class CreateTaskComponent {
     });
   }
 
+  // onSubmit() {
+  //   if (this.taskForm.valid) {
+  //     console.log("Task Created: ", this.taskForm.value);
+  //     this.taskService.createTask(this.taskForm.value).subscribe(() => {
+  //       alert('Task Created Successfully!');
+  //       this.router.navigate(['/home']);
+  //     });
+  //   }
+  // }
   onSubmit() {
     if (this.taskForm.valid) {
+      const userId = localStorage.getItem('userId'); // Get userId from local storage
+  
+      if (!userId) {
+        alert('User not logged in!');
+        return;
+      }
+  
       console.log("Task Created: ", this.taskForm.value);
-      this.taskService.createTask(this.taskForm.value).subscribe(() => {
-        alert('Task Created Successfully!');
-        this.router.navigate(['/home']);
-      });
+  
+      this.taskService.createTask(this.taskForm.value, +userId) // Pass userId
+      .subscribe(
+        (response: any) => {  // Expect JSON response
+          alert(response.message || 'Task Created Successfully!');
+          this.router.navigate(['/home']);  // Redirect after success
+        },
+        (error) => {
+          console.error('Task creation failed:', error);
+          alert(error.error?.message || 'Task creation failed!');
+        }
+      );
     }
   }
+  
 }

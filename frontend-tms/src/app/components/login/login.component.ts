@@ -17,16 +17,28 @@ export class LoginComponent {
 
   constructor(private loginService: LoginService, private router: Router) {}
 
+  // onSubmit() {
+  //   this.loginService.login(this.loginData).subscribe(
+  //     (response: any) => {
+  //       alert(response.message); // Show success message
+  //       console.log("HIII")
+  //       this.router.navigate(['/home']); // Navigate to home page
+  //     },
+  //     (error) => {
+  //       console.log(error);
+  //       alert(error.error.message || 'Login failed!');
+  //     }
+  //   );
+  // }
   onSubmit() {
-    this.loginService.loginUser(this.loginData).subscribe(
+    this.loginService.login(this.loginData).subscribe(
       (response: any) => {
-        alert(response.message); // Show success message
-        console.log("HIII")
+        alert('Login successful!'); // Show success message
         this.router.navigate(['/home']); // Navigate to home page
       },
-      (error) => {
-        console.log(error);
-        alert(error.error.message || 'Login failed!');
+      (error: any) => { // Explicitly declare 'error' type
+        console.error('Login error:', error);
+        alert(error.error?.message || 'Login failed!');
       }
     );
   }
