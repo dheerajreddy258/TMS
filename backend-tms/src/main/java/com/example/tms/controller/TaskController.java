@@ -23,11 +23,6 @@ public class TaskController {
     @Autowired
     private RegisterRepo repo;
 
-    // Create Task
-//    @PostMapping("/create")
-//    public Task createTask(@RequestBody Task task) {
-//        return taskRepo.save(task);
-//    }
     @PostMapping("/create")
     public ResponseEntity<?> createTask(@RequestBody Task task, @RequestParam Long userId) {
         Register user = repo.findById(userId)
@@ -37,41 +32,12 @@ public class TaskController {
         return ResponseEntity.ok(Map.of("message", "Task created successfully!"));
     }
 
-
-    // Get All Tasks
-//    @GetMapping("/all")
-//    public List<Task> getAllTasks() {
-//        return taskRepo.findAll();
-//    }
-//
-//    // Get Task by ID
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
-//        Task task = taskRepo.findById(id).orElse(null);
-//        return ResponseEntity.ok(task);
-//    }
-    
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Task>> getUserTasks(@PathVariable Long userId) {
         List<Task> tasks = taskRepo.findByUserId(userId);
         return ResponseEntity.ok(tasks);
     }
 
-
-    // Update Task
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task taskDetails) {
-//        Task task = taskRepo.findById(id).orElse(null);
-//        if (task != null) {
-//            task.setTitle(taskDetails.getTitle());
-//            task.setDescription(taskDetails.getDescription());
-//            task.setDueDate(taskDetails.getDueDate());
-//            task.setStatus(taskDetails.getStatus());
-//            task.setPriority(taskDetails.getPriority());
-//            return ResponseEntity.ok(taskRepo.save(task));
-//        }
-//        return ResponseEntity.notFound().build();
-//    }
     @PutMapping("/update/{id}")
     public ResponseEntity<?> updateTask(@PathVariable Long id, @RequestBody Task updatedTask, @RequestParam Long userId) {
         Task task = taskRepo.findById(id).orElse(null);
@@ -88,14 +54,6 @@ public class TaskController {
         
         return ResponseEntity.ok(taskRepo.save(task));
     }
-
-
-    // Delete Task
-//    @DeleteMapping("/delete/{id}")
-//    public ResponseEntity<String> deleteTask(@PathVariable Long id) {
-//        taskRepo.deleteById(id);
-//        return ResponseEntity.ok("Task deleted successfully!");
-//    }
     
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteTask(@PathVariable Long id, @RequestParam Long userId) {
@@ -106,7 +64,19 @@ public class TaskController {
         }
 
         taskRepo.deleteById(id);
-        return ResponseEntity.ok("Task deleted successfully!");
+        return ResponseEntity.ok(Map.of("message", "Task deleted successfully!"));
     }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getTaskById(@PathVariable Long id, @RequestParam Long userId) {
+        Task task = taskRepo.findById(id).orElse(null);
+
+        if (task == null || !task.getUser().getId().equals(userId)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Task not found or does not belong to user!");
+        }
+
+        return ResponseEntity.ok(task);
+    }
+
 
 }
