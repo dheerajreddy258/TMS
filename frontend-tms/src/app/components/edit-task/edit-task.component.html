@@ -1,0 +1,45 @@
+<div class="edit-task-container">
+    <h2>Edit Task</h2>
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title" placeholder="Enter task title" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description" placeholder="Enter task description" required></textarea>
+      </div>
+  
+      <div class="form-group">
+        <label for="dueDate">Due Date</label>
+        <input id="dueDate" type="date" formControlName="dueDate" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select id="status" formControlName="status">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+  
+      <div class="form-group">
+        <label for="priority">Priority</label>
+        <select id="priority" formControlName="priority">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+  
+      <div class="button-group">
+        <button type="submit" [disabled]="taskForm.invalid">Update Task</button>
+        <button type="button" class="cancel-button" (click)="router.navigate(['/home'])">Cancel</button>
+      </div>
+  
+    </form>
+</div>
+  

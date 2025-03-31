@@ -96,3 +96,27 @@ p {
   color: #7f8c8d;
   line-height: 1.6;
 }
+
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.filter-container label {
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.filter-container select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.task-card button {
+  margin-right: 10px; /* Add spacing between buttons */
+}

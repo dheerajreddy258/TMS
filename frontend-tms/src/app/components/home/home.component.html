@@ -20,22 +20,42 @@
         <div class="header">
             <button class="logout-button" routerLink="/login">Logout</button>
         </div>
+        
         <h1>Task List</h1>
-        <div class="content">
-          
+
+        <!-- Filter Options -->
+        <div class="filter-container">
+            <label for="status">Filter by Status:</label>
+            <select id="status" [(ngModel)]="selectedStatus" (change)="applyFilters()">
+                <option value="all">All</option>
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+
+            <label for="priority">Filter by Priority:</label>
+            <select id="priority" [(ngModel)]="selectedPriority" (change)="applyFilters()">
+                <option value="all">All</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+        </div>
+
+        <div class="content">      
           <div class="task-list">
-              <div *ngFor="let task of tasks" class="task-card">
+              <div *ngFor="let task of filteredTasks" class="task-card"><br>
                   <h3>{{ task.title }}</h3>
                   <p>{{ task.description }}</p>
                   <p><strong>Due Date:</strong> {{ task.dueDate }}</p>
                   <p><strong>Status:</strong> {{ task.status }}</p>
+                  <p><strong>Priority:</strong> {{ task.priority }}</p>
+
+                  <button (click)="editTask(task.id)">✏️ Edit</button>
                   <button (click)="deleteTask(task.id)">🗑️ Delete</button>
               </div>
-          </div>
-            <!-- <h1>Welcome to the Home Page!</h1>
-            <p>This is your application dashboard where you can manage your tasks. can place ur cards inside content</p> -->
-            
-          </div>
+          </div>            
+        </div>
     </div>
 </body>
 </html>

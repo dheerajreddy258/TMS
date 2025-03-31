@@ -21,15 +21,6 @@ export class CreateTaskComponent {
     });
   }
 
-  // onSubmit() {
-  //   if (this.taskForm.valid) {
-  //     console.log("Task Created: ", this.taskForm.value);
-  //     this.taskService.createTask(this.taskForm.value).subscribe(() => {
-  //       alert('Task Created Successfully!');
-  //       this.router.navigate(['/home']);
-  //     });
-  //   }
-  // }
   onSubmit() {
     if (this.taskForm.valid) {
       const userId = localStorage.getItem('userId'); // Get userId from local storage

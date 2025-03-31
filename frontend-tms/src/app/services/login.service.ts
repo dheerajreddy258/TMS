@@ -11,23 +11,6 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-  // login(loginData: any): Observable<any> {
-  //   return this.http.post(`${this.baseUrl}`, loginData);
-  // }
-  // login(loginData: { email: string, password: string }) {
-  //   return this.http.post<{ userId: number, token: string }>(`${this.baseUrl}`, loginData)
-  //     .pipe(
-  //       tap(response => {
-  //         localStorage.setItem('userId', response.userId.toString()); // Store userId
-  //         localStorage.setItem('token', response.token); // Store token (if using JWT)
-  //       })
-  //     );
-  // }
-
-  // logout() {
-  //   localStorage.removeItem('userId'); // Clear userId on logout
-  //   localStorage.removeItem('token');  // Clear token
-  // }
   login(credentials: { email: string, password: string }): Observable<boolean> {
     return this.http.post<any>(`${this.baseUrl}`, credentials).pipe(
       tap(response => {
