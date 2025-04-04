@@ -42,30 +42,6 @@ public class TmsController {
 	    return ResponseEntity.ok(response);
 	}
 	
-//	@PostMapping("/login")
-//	public ResponseEntity<Map<String, String>> loginUser(@RequestBody Register loginRequest) {
-//		Map<String, String> response = new HashMap<>();
-//
-//	    if (loginRequest.getEmail() == null || loginRequest.getPassword() == null) {
-//	        response.put("message", "Username or Password is missing");
-//	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
-//	    }
-//
-//	    Register user = repo.findByEmail(loginRequest.getEmail());
-//
-//	    if (user == null) {
-//	        response.put("message", "User not found");
-//	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-//	    }
-//
-//	    if (!user.getPassword().equals(loginRequest.getPassword())) {
-//	        response.put("message", "Incorrect password");
-//	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-//	    }
-//
-//	    response.put("message", "Login Successful!");
-//	    return ResponseEntity.ok(response);
-//	}
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, Object>> loginUser(@RequestBody Register loginRequest) {
 	    Map<String, Object> response = new HashMap<>();
